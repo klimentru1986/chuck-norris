@@ -96,7 +96,7 @@ class RitChuck extends HTMLElement {
 
   async getData() {
     const response = await fetch(
-      'http://api.icndb.com/jokes/random?limitTo=[nerdy]'
+      'https://api.icndb.com/jokes/random?limitTo=[nerdy]'
     );
 
     if (response.ok) {
