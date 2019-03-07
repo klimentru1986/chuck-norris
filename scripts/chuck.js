@@ -2,7 +2,9 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
   :host {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto;
     max-width: 500px;
     box-sizing: border-box;
@@ -68,10 +70,7 @@ class RitChuck extends HTMLElement {
 
     this.updateView();
     this.refreshButton.addEventListener('click', this.updateView.bind(this));
-    this.clipboardButton.addEventListener(
-      'click',
-      this.copyTextToClipboard.bind(this)
-    );
+    this.clipboardButton.addEventListener('click', this.copyTextToClipboard.bind(this));
   }
 
   disconnectedCallback() {
@@ -85,19 +84,14 @@ class RitChuck extends HTMLElement {
         this.joke = res.value.joke;
         this.textContainer.innerHTML = this.joke;
         console.log(`../assets/chuck-${Math.floor(Math.random() * 3)}.jpg`);
-        this.imageElement.setAttribute(
-          'src',
-          `./assets/chuck-${Math.floor(Math.random() * 3)}.jpg`
-        );
+        this.imageElement.setAttribute('src', `./assets/chuck-${Math.floor(Math.random() * 3)}.jpg`);
       },
       err => console.log(err)
     );
   }
 
   async getData() {
-    const response = await fetch(
-      'https://api.icndb.com/jokes/random?limitTo=[nerdy]'
-    );
+    const response = await fetch('https://api.icndb.com/jokes/random?limitTo=[nerdy]');
 
     if (response.ok) {
       const data = await response.json();
